@@ -1,9 +1,9 @@
-package spark.windowing
+package spark.windowing.basic_examples
 
 import models.Salary
 import org.apache.spark.sql.expressions.Window
+import org.apache.spark.sql.functions.max
 import utils.Utility
-import org.apache.spark.sql.functions._
 
 object CustomWindowDefinitions {
 
@@ -55,20 +55,20 @@ object CustomWindowDefinitions {
     val range_unbounded_df = empSalary.withColumn("max_salary", max("salary").over(unboundedFollowingWinSpec))
     range_unbounded_df.show()
 
-//      +---------+-----+------+----------+
-//      |  depName|empNo|salary|max_salary|
-//      +---------+-----+------+----------+
-//      |  develop|    7|  4200|      6000| Partition bounds for this row: [4500, limitless]
-//      |  develop|    9|  4500|      6000|
-//      |  develop|   10|  5200|      6000|
-//      |  develop|   11|  5200|      6000|
-//      |  develop|    8|  6000|      null| Partition bounds for this row: [6300, limitless]
-//      |personnel|    5|  3500|      3900| Partition bounds for this row: [3800, limitless]
-//      |personnel|    2|  3900|      null|
-//      |    sales|    3|  4800|      null|
-//      |    sales|    4|  4800|      null|
-//      |    sales|    1|  5000|      null|
-//      +---------+-----+------+----------+
+    //      +---------+-----+------+----------+
+    //      |  depName|empNo|salary|max_salary|
+    //      +---------+-----+------+----------+
+    //      |  develop|    7|  4200|      6000| Partition bounds for this row: [4500, limitless]
+    //      |  develop|    9|  4500|      6000|
+    //      |  develop|   10|  5200|      6000|
+    //      |  develop|   11|  5200|      6000|
+    //      |  develop|    8|  6000|      null| Partition bounds for this row: [6300, limitless]
+    //      |personnel|    5|  3500|      3900| Partition bounds for this row: [3800, limitless]
+    //      |personnel|    2|  3900|      null|
+    //      |    sales|    3|  4800|      null|
+    //      |    sales|    4|  4800|      null|
+    //      |    sales|    1|  5000|      null|
+    //      +---------+-----+------+----------+
 
 
     val rowsBetweenWinSpec = Window
@@ -79,20 +79,20 @@ object CustomWindowDefinitions {
     val rows_between_df = empSalary.withColumn("max_salary", max("salary").over(rowsBetweenWinSpec))
     rows_between_df.show()
 
-//      +---------+-----+------+----------+
-//      |  depName|empNo|salary|max_salary|
-//      +---------+-----+------+----------+
-//      |  develop|    7|  4200|      4500|
-//      |  develop|    9|  4500|      5200|
-//      |  develop|   10|  5200|      5200|
-//      |  develop|   11|  5200|      6000|
-//      |  develop|    8|  6000|      6000|
-//      |personnel|    5|  3500|      3900|
-//      |personnel|    2|  3900|      3900|
-//      |    sales|    3|  4800|      4800|
-//      |    sales|    4|  4800|      5000|
-//      |    sales|    1|  5000|      5000|
-//      +---------+-----+------+----------+
+    //      +---------+-----+------+----------+
+    //      |  depName|empNo|salary|max_salary|
+    //      +---------+-----+------+----------+
+    //      |  develop|    7|  4200|      4500|
+    //      |  develop|    9|  4500|      5200|
+    //      |  develop|   10|  5200|      5200|
+    //      |  develop|   11|  5200|      6000|
+    //      |  develop|    8|  6000|      6000|
+    //      |personnel|    5|  3500|      3900|
+    //      |personnel|    2|  3900|      3900|
+    //      |    sales|    3|  4800|      4800|
+    //      |    sales|    4|  4800|      5000|
+    //      |    sales|    1|  5000|      5000|
+    //      +---------+-----+------+----------+
   }
 
 
